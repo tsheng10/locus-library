@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOCUS · 缘知 — 情报图书馆</title>
+<style>
+:root{--oval:#C0392B;--ink:#1a1a1a;--muted:#777;--line:#e8e2d8;--bg:#faf8f4;--card:#fff;--gold:#b8860b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:28px 18px 60px}
+header{border-bottom:3px solid var(--oval);padding-bottom:18px;margin-bottom:22px}
+h1{font-size:26px;letter-spacing:1px}.brand{color:var(--oval);font-weight:700}
+.mission{font-size:15px;color:#444;margin-top:8px;font-weight:500}
+.mission .q{color:var(--oval)}
+.sub{color:var(--muted);font-size:12.5px;margin-top:6px}
+h2{font-size:16px;margin:24px 0 12px}
+/* project cards */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.projects{grid-template-columns:1fr}}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink);display:block;transition:box-shadow .15s,border-color .15s}
+.pcard:hover{border-color:var(--oval);box-shadow:0 3px 14px rgba(192,57,43,.08)}
+.pcard .ptag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:4px;background:#f2ece4;color:#8a6d3b;margin-bottom:8px}
+.pcard h3{font-size:16px;margin-bottom:6px}
+.pcard p{font-size:13px;color:#555}
+.pcard .go{margin-top:10px;font-size:12.5px;color:var(--oval);font-weight:600}
+/* how to ask */
+.howto{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:8px}
+.howto h3{font-size:14.5px;margin-bottom:10px}
+.howto ol{padding-left:20px}
+.howto li{font-size:13.5px;margin:6px 0;color:#333}
+.tpl{background:#faf6ef;border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;font-size:12.5px;color:#444;white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;line-height:1.7}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1><span class="brand">LOCUS</span> · 缘知 — 情报图书馆</h1>
+  <div class="mission">交付更好的场所，决定要<span class="q">改变什么、在哪里改、为什么改。</span></div>
+  <div class="sub">基于证据的城市设计战略制定 + 零售咨询 ｜ Oval Partnership 情报代理 · EMIS / Ask ISI</div>
+</header>
+
+<h2>项目情报台</h2>
+<div class="projects">
+  <a class="pcard" href="crland/">
+    <span class="ptag">零售 · 商业地产基准</span>
+    <h3>华润置地 / 万象城 / 万象天地</h3>
+    <p>购物中心产品线（M1/M2/M3）定位 + 深圳万象城 / 万象天地营收。9 份研报 PDF 原件内嵌，可搜索、可筛选。</p>
+    <div class="go">进入 →</div>
+  </a>
+  <a class="pcard" href="hunan-road/">
+    <span class="ptag">城市更新 · 存量商业街复兴</span>
+    <h3>南京湖南路</h3>
+    <p>1.1km 老牌商业街 + 1073m 烂尾地下街的复兴。地上带动地下、颐和路—玄武湖两头挑。含核心诊断 + 鼓楼区 benchmark。</p>
+    <div class="go">进入 →</div>
+  </a>
+</div>
+
+<h2>怎么问出好问题（给新同事的模板）</h2>
+<div class="howto">
+  <h3>一个好问题的四要素</h3>
+  <ol>
+    <li><strong>给足背景</strong>：场地/项目是什么、卡在哪、已经做过什么（一句话说清）。</li>
+    <li><strong>说清地理与行业</strong>：哪个城市、哪个商圈、哪个赛道。</li>
+    <li><strong>点名要什么</strong>：数据与趋势？成功/失败案例？可行性判断？——别只问「帮我查查」。</li>
+    <li><strong>关联决策</strong>：这份情报要用在什么决策上（定位/定价/业态/投融资）。</li>
+  </ol>
+  <div class="tpl">复制这个模板，填好发给 Ask ISI：
+
+「{项目}市场情报：
+{场地背景 + 现状困境 + 已经做过的尝试}。
+现在要做 {决策/策划}，策略是「{一句话策略}」。
+请提供：
+1) {城市/商圈} 商业地产与零售市场的最新数据与趋势；
+2) 类似 {类型} 存量改造/复兴的成功与失败案例及 benchmark；
+3) {关键难点} 的可行性与经验教训。」</div>
+  <p style="font-size:12.5px;color:var(--muted)">参考真实问法：见「华润置地」和「南京湖南路」两个情报台里的检索原文。</p>
+</div>
+
+<footer>
+  <p>LOCUS · 缘知 — 场所精神 × 椭圆的轨迹。因连接而生洞察。</p>
+  <p>情报台随项目持续增长；每个新项目问一次 ISI，就多一条可被引用的「线程」。</p>
+</footer>
+</div>
+</body>
+</html>
