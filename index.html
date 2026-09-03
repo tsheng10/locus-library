@@ -153,6 +153,15 @@ footer{padding:20px 40px; font-size:12px; color:var(--grey3)}
 .nohit{font-size:12px; color:var(--grey3); padding:8px 40px; display:none}
 .nohit.show{display:block}
 .hidden{display:none!important}
+
+/* new project form */
+.newproj{padding:56px 40px;border-bottom:1px solid var(--hairline)}
+.np-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.np-field label{display:block;margin-bottom:8px;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--grey3)}
+.np-field input,.np-field textarea{width:100%;padding:12px 14px;border:1px solid var(--ink);font-family:inherit;font-size:14px;background:var(--paper);color:var(--ink);outline:none;border-radius:0}
+.np-field input:focus,.np-field textarea:focus{border-color:var(--brick)}
+.np-full{grid-column:1/-1}
+.nphint{font-size:12px;color:var(--grey3);margin-left:14px}
 </style>
 </head>
 <body>
@@ -194,6 +203,29 @@ footer{padding:20px 40px; font-size:12px; color:var(--grey3)}
     <span><span class="t-title">下一个项目</span><div class="t-desc">问一次 Ask ISI，即成一条线程</div></span>
     <span class="t-type">—</span><span class="t-pdf">—</span><span class="arr" style="color:#bdbdbd">→</span>
   </div></div>
+
+
+<div class="newproj" id="newproj">
+  <span class="lbl brick">新建项目 · 生成线程</span>
+  <div class="np-grid">
+    <div class="np-field">
+      <label>项目名 *</label>
+      <input id="pname" type="text" placeholder="如：合肥三孝口">
+    </div>
+    <div class="np-field">
+      <label>城市 / 商圈</label>
+      <input id="pcity" type="text" placeholder="如：合肥庐阳区">
+    </div>
+    <div class="np-field np-full">
+      <label>一句话背景</label>
+      <textarea id="pbg" rows="3" placeholder="场地/项目是什么、卡在哪、要做什么决策…"></textarea>
+    </div>
+    <div class="np-field np-full">
+      <button class="btn" onclick="submitProject()">提交 · 生成新线程请求</button>
+      <span class="nphint">提交后打开一条 GitHub Issue，agent 自动接管 → 问 ISI → 下 PDF → 建情报台 → 新线程上线。</span>
+    </div>
+  </div>
+</div>
 
 <div class="howto" id="howto">
   <div class="left">
@@ -244,6 +276,17 @@ footer{padding:20px 40px; font-size:12px; color:var(--grey3)}
 
 <script>
 function copyTpl(){var t=document.querySelector('.tplwrap pre').textContent;navigator.clipboard.writeText(t).then(function(){var b=document.getElementById('copybtn');b.textContent='已复制';setTimeout(function(){b.textContent='复制模板';},1500);});}
+
+function submitProject(){
+  var name=document.getElementById('pname').value.trim();
+  var city=document.getElementById('pcity').value.trim();
+  var bg=document.getElementById('pbg').value.trim();
+  if(!name){alert('请填项目名');return;}
+  var title=encodeURIComponent('[新项目] '+name);
+  var body=encodeURIComponent('**项目名**：'+name+'\n**城市/商圈**：'+(city||'—')+'\n**一句话背景**：'+(bg||'—')+'\n\n---\n由情报图书馆「新建项目」表单自动创建。');
+  var url='https://github.com/tsheng10/locus-library/issues/new?title='+title+'&body='+body+'&labels=new-project';
+  window.open(url,'_blank');
+}
 </script>
 </body>
 </html>
