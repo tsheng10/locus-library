@@ -4,84 +4,246 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOCUS · 缘知 — 情报图书馆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--oval:#C0392B;--ink:#1a1a1a;--muted:#777;--line:#e8e2d8;--bg:#faf8f4;--card:#fff;--gold:#b8860b}
+:root{
+  --paper:#ffffff; --paper-grey:#f5f4f1; --paper-deep:#ebe9e4;
+  --ink:#111111; --grey2:#4a4a4a; --grey3:#8a8a8a; --grey4:#bdbdbd;
+  --hairline:#d9d7d2; --brick:#9e3b2b; --brick-dark:#7a2c20;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:28px 18px 60px}
-header{border-bottom:3px solid var(--oval);padding-bottom:18px;margin-bottom:22px}
-h1{font-size:26px;letter-spacing:1px}.brand{color:var(--oval);font-weight:700}
-.mission{font-size:15px;color:#444;margin-top:8px;font-weight:500}
-.mission .q{color:var(--oval)}
-.sub{color:var(--muted);font-size:12.5px;margin-top:6px}
-h2{font-size:16px;margin:24px 0 12px}
-/* project cards */
-.projects{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:640px){.projects{grid-template-columns:1fr}}
-.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink);display:block;transition:box-shadow .15s,border-color .15s}
-.pcard:hover{border-color:var(--oval);box-shadow:0 3px 14px rgba(192,57,43,.08)}
-.pcard .ptag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:4px;background:#f2ece4;color:#8a6d3b;margin-bottom:8px}
-.pcard h3{font-size:16px;margin-bottom:6px}
-.pcard p{font-size:13px;color:#555}
-.pcard .go{margin-top:10px;font-size:12.5px;color:var(--oval);font-weight:600}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Archivo","Noto Sans JP","PingFang SC","Hiragino Sans","Microsoft YaHei",sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.6;
+  -webkit-font-smoothing:antialiased; font-size:14px;
+}
+a{color:var(--ink); text-decoration:none; transition:color .15s}
+a:hover{color:var(--brick)}
+.container{max-width:1000px; margin:0 auto; padding-left:40px; padding-right:40px}
+.lbl{font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--grey3)}
+.lbl.brick{color:var(--brick)}
+.num{font-family:"Archivo",sans-serif; font-size:36px; font-weight:500; letter-spacing:-.01em; line-height:1.05}
+.num.accent{color:var(--brick)}
+.btn{display:inline-block; border:1px solid var(--ink); padding:12px 16px; font-size:12px; font-weight:500; letter-spacing:.08em; background:transparent; color:var(--ink); cursor:pointer; transition:background .15s,color .15s}
+.btn:hover{background:var(--ink); color:var(--paper)}
+.hairline-top{border-top:1px solid var(--ink)}
+.hairline-bot{border-bottom:1px solid var(--hairline)}
+.colrule{border-right:1px solid var(--hairline)}
+/* top bar */
+.topbar{display:flex; justify-content:space-between; align-items:center; padding:20px 40px; border-bottom:1px solid var(--ink)}
+.brand{font-family:"Archivo",sans-serif; font-size:14px; font-weight:600; letter-spacing:.14em}
+.brand .zh{font-family:"Noto Sans JP","PingFang SC",sans-serif; font-weight:400; letter-spacing:.05em; color:var(--grey2)}
+.topnav{display:flex; gap:28px}
+.topnav a{font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ink)}
+.topnav a.brick{color:var(--brick)}
+.topnav a:hover{color:var(--brick)}
+/* hero */
+.hero{display:grid; grid-template-columns:1fr 300px; padding:56px 40px 40px; border-bottom:1px solid var(--hairline)}
+.hero h1{font-size:52px; font-weight:500; line-height:1.15; letter-spacing:-.01em}
+.hero .sub{font-size:26px; color:var(--grey2); margin-top:8px; line-height:1.35}
+.hero .sub em{color:var(--brick); font-style:normal}
+.hero .pos{border-left:1px solid var(--hairline); padding-left:20px; font-size:14px; color:var(--grey2); align-self:end; line-height:1.7}
+/* thread index table */
+.threads{padding:0}
+.tbl-head{display:grid; grid-template-columns:60px 1fr 200px 120px 40px; padding:14px 40px; border-bottom:1px solid var(--ink)}
+.thread-row{display:grid; grid-template-columns:60px 1fr 200px 120px 40px; padding:22px 40px; border-bottom:1px solid var(--hairline); align-items:baseline; transition:background .15s}
+.thread-row:hover{background:var(--paper-grey)}
+.thread-row .no{font-size:12px; color:var(--grey3); font-family:"Archivo",sans-serif}
+.thread-row .t-title{font-size:20px; font-weight:500; line-height:1.25}
+.thread-row .t-desc{font-size:14px; color:var(--grey2); margin-top:4px}
+.thread-row .t-type{font-size:13px; color:var(--grey2)}
+.thread-row .t-pdf{font-size:13px; color:var(--grey2)}
+.thread-row .arr{color:var(--brick); font-size:16px; text-align:right}
+.thread-row.placeholder{color:var(--grey4)}
+.thread-row.placeholder .t-title{color:var(--grey4); font-weight:400}
 /* how to ask */
-.howto{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:8px}
-.howto h3{font-size:14.5px;margin-bottom:10px}
-.howto ol{padding-left:20px}
-.howto li{font-size:13.5px;margin:6px 0;color:#333}
-.tpl{background:#faf6ef;border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;font-size:12.5px;color:#444;white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;line-height:1.7}
-footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.howto{display:grid; grid-template-columns:260px 1fr; padding:56px 40px; border-bottom:1px solid var(--hairline)}
+.howto .left h2{font-size:26px; font-weight:500; margin-top:12px; line-height:1.25}
+.howto .left p{font-size:14px; color:var(--grey2); margin-top:12px}
+.howto .right{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--ink)}
+.howto .right .step{padding:20px 16px; border-right:1px solid var(--hairline)}
+.howto .right .step:last-child{border-right:none}
+.howto .step .n{color:var(--brick); font-family:"Archivo",sans-serif; font-size:13px; font-weight:600}
+.howto .step h4{font-size:15px; font-weight:500; margin-top:10px; line-height:1.35}
+.howto .step p{font-size:13px; color:var(--grey2); margin-top:8px; line-height:1.6}
+/* template block */
+.tplwrap{background:var(--paper-grey); padding:24px 28px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center}
+.tplwrap pre{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:13px; line-height:1.9; color:var(--grey2); white-space:pre-wrap; word-break:break-word}
+/* methodology + emis */
+.meth{padding:56px 40px; border-bottom:1px solid var(--hairline)}
+.meth .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--ink); margin-top:20px}
+.meth .m{padding:18px 20px; border-right:1px solid var(--hairline); font-size:13px; color:var(--grey2)}
+.meth .m:last-child{border-right:none}
+.meth .m h4{font-size:14px; font-weight:500; color:var(--ink); margin-bottom:8px}
+footer{padding:20px 40px; font-size:12px; color:var(--grey3)}
+/* ===== project dashboard ===== */
+.crumbs{display:flex; justify-content:space-between; align-items:center; padding:16px 40px; border-bottom:1px solid var(--ink)}
+.crumbs a{font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase}
+.crumbs .right{font-size:11px; letter-spacing:.1em; color:var(--grey3)}
+.ptitle{padding:40px 40px 32px; border-bottom:1px solid var(--hairline)}
+.ptitle h1{font-size:36px; font-weight:500; line-height:1.2; letter-spacing:-.01em}
+.ptitle .psub{font-size:16px; color:var(--grey2); margin-top:10px}
+/* KPI bar */
+.kpibar{display:grid; grid-template-columns:repeat(4,1fr)}
+.kpi{padding:24px 20px; border-right:1px solid var(--hairline); cursor:pointer; transition:background .15s}
+.kpi:last-child{border-right:none}
+.kpi .num{font-size:36px}
+.kpi .klabel{font-size:12px; color:var(--grey2); margin-top:10px; line-height:1.5}
+.kpi .hint{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey3); margin-top:16px}
+.kpi.open{background:var(--paper-grey); box-shadow:inset 0 -3px 0 var(--brick)}
+.kpi.open .hint{color:var(--brick)}
+/* expand panel */
+.panel{display:none; background:var(--paper-grey); border-bottom:1px solid var(--hairline)}
+.panel.open{display:block}
+.panel .inner{display:grid; grid-template-columns:200px 1fr 260px; padding:28px 40px; gap:32px}
+.panel .pt h3{font-size:18px; font-weight:500; margin-top:12px; line-height:1.3}
+.panel .pt p{font-size:13px; color:var(--grey2); margin-top:10px; line-height:1.6}
+.panel .rows .r{display:grid; grid-template-columns:1fr 120px; padding:8px 0; border-bottom:1px solid var(--hairline); font-size:13px}
+.panel .rows .r .k{color:var(--grey2)}
+.panel .rows .r .v{text-align:right; font-weight:500; font-family:"Archivo",sans-serif}
+.panel .src{border-left:1px solid var(--hairline); padding-left:20px}
+.panel .src .s{display:block; padding:5px 0; font-size:12.5px; line-height:1.5}
+.panel .src .s .n{color:var(--brick); font-family:"Archivo",sans-serif; font-weight:600; margin-right:6px}
+.panel .src .s .pg{color:var(--grey3)}
+.panel .src .openpdf{display:inline-block; margin-top:10px; font-size:12px; font-weight:500; color:var(--brick); letter-spacing:.05em}
+/* judgments */
+.diag{padding:0}
+.diag-head{display:grid; grid-template-columns:200px 1fr; padding:40px 40px 16px}
+.diag-list{border-top:1px solid var(--ink); margin-left:0}
+.diag-row{display:grid; grid-template-columns:40px 1fr 80px; padding:18px 0; border-bottom:1px solid var(--hairline); cursor:pointer; transition:background .15s; align-items:baseline}
+.diag-row:hover{background:var(--paper-grey)}
+.diag-row .no{color:var(--brick); font-family:"Archivo",sans-serif; font-size:15px; font-weight:600}
+.diag-row .jt{font-size:15px; font-weight:500; line-height:1.45}
+.diag-row .jsub{font-size:14px; color:var(--grey2); margin-top:4px; font-weight:400; line-height:1.55}
+.diag-row .ev{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey3); text-align:right}
+.diag-row.open{background:var(--paper-grey)}
+.diag-panel{display:none; background:var(--paper-grey); border-bottom:1px solid var(--hairline)}
+.diag-panel.open{display:block}
+.diag-panel .inner{display:grid; grid-template-columns:1fr 240px; padding:20px 40px 24px; gap:32px; margin-left:56px}
+/* chart */
+.chart{padding:40px 40px 24px}
+.chart .cwrap{margin-top:20px; max-width:640px}
+.cbar{display:grid; grid-template-columns:180px 1fr 70px; align-items:center; gap:16px; margin:14px 0}
+.cbar .cl{font-size:13px; color:var(--grey2)}
+.cbar .track{height:10px; background:var(--paper-grey)}
+.cbar .fill{height:10px}
+.cbar .cv{font-size:13px; text-align:right; font-weight:500; font-family:"Archivo",sans-serif}
+.cnote{font-size:12px; color:var(--grey3); margin-top:16px}
+/* PDF list */
+.pdflist{padding:40px 40px 0}
+.pdfrow{border-bottom:1px solid var(--hairline)}
+.pdfrow>summary{display:grid; grid-template-columns:24px 1fr auto auto; gap:12px; padding:16px 0; cursor:pointer; list-style:none; align-items:baseline; transition:background .15s}
+.pdfrow>summary:hover{background:var(--paper-grey)}
+.pdfrow>summary::-webkit-details-marker{display:none}
+.pdfrow .no{font-size:12px; color:var(--grey3); font-family:"Archivo",sans-serif}
+.pdfrow .pn{font-size:14px; font-weight:500}
+.pdfrow .pt{font-size:12px; color:var(--grey3)}
+.pdfrow .open{font-size:12px; font-weight:500; color:var(--brick); letter-spacing:.05em}
+.pdfbody{background:var(--paper-deep)}
+.pdfbody iframe{width:100%; height:72vh; border:0; display:block}
+/* search */
+.search{position:sticky; top:0; z-index:20; background:var(--paper); padding:12px 40px; border-bottom:1px solid var(--hairline); display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.search input{flex:1; min-width:200px; padding:10px 14px; border:1px solid var(--ink); font-size:14px; font-family:inherit; background:var(--paper); color:var(--ink); outline:none}
+.search input:focus{border-color:var(--brick)}
+.chips{display:flex; gap:8px; flex-wrap:wrap}
+.chip{padding:6px 14px; border:1px solid var(--hairline); font-size:12px; cursor:pointer; letter-spacing:.05em; transition:all .15s}
+.chip.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.nohit{font-size:12px; color:var(--grey3); padding:8px 40px; display:none}
+.nohit.show{display:block}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1><span class="brand">LOCUS</span> · 缘知 — 情报图书馆</h1>
-  <div class="mission">交付更好的场所，决定要<span class="q">改变什么、在哪里改、为什么改。</span></div>
-  <div class="sub">基于证据的城市设计战略制定 + 零售咨询 ｜ Oval Partnership 情报代理 · EMIS / Ask ISI</div>
-</header>
-
-<h2>项目情报台</h2>
-<div class="projects">
-  <a class="pcard" href="crland/">
-    <span class="ptag">零售 · 商业地产基准</span>
-    <h3>华润置地 / 万象城 / 万象天地</h3>
-    <p>购物中心产品线（M1/M2/M3）定位 + 深圳万象城 / 万象天地营收。9 份研报 PDF 原件内嵌，可搜索、可筛选。</p>
-    <div class="go">进入 →</div>
-  </a>
-  <a class="pcard" href="hunan-road/">
-    <span class="ptag">城市更新 · 存量商业街复兴</span>
-    <h3>南京湖南路</h3>
-    <p>1.1km 老牌商业街 + 1073m 烂尾地下街的复兴。地上带动地下、颐和路—玄武湖两头挑。含核心诊断 + 鼓楼区 benchmark。</p>
-    <div class="go">进入 →</div>
-  </a>
+<div class="topbar">
+  <div class="brand">LOCUS <span class="zh">缘知 · 情报图书馆</span></div>
+  <div class="topnav">
+    <a href="#threads">线程</a><a href="#howto">怎么问</a><a href="#meth">方法论</a><a href="#emis" class="brick">EMIS · Ask ISI</a>
+  </div>
 </div>
 
-<h2>怎么问出好问题（给新同事的模板）</h2>
-<div class="howto">
-  <h3>一个好问题的四要素</h3>
-  <ol>
-    <li><strong>给足背景</strong>：场地/项目是什么、卡在哪、已经做过什么（一句话说清）。</li>
-    <li><strong>说清地理与行业</strong>：哪个城市、哪个商圈、哪个赛道。</li>
-    <li><strong>点名要什么</strong>：数据与趋势？成功/失败案例？可行性判断？——别只问「帮我查查」。</li>
-    <li><strong>关联决策</strong>：这份情报要用在什么决策上（定位/定价/业态/投融资）。</li>
-  </ol>
-  <div class="tpl">复制这个模板，填好发给 Ask ISI：
+<div class="hero">
+  <div>
+    <h1>交付更好的场所。</h1>
+    <div class="sub">决定要<em>改变什么、在哪里改、为什么改</em>。</div>
+  </div>
+  <div class="pos">基于证据的城市设计战略制定 + 零售咨询。开发商与政府之间的解释层 / 中介层。</div>
+</div>
 
-「{项目}市场情报：
+<div class="tbl-head" id="threads">
+  <span class="lbl">No.</span><span class="lbl">线程 Thread</span><span class="lbl">类型</span><span class="lbl">引用</span><span></span>
+</div>
+<div class="threads">
+  <a class="thread-row" href="crland/">
+    <span class="no">01</span>
+    <span><span class="t-title">华润置地 · 万象城 / 万象天地</span><div class="t-desc">购物中心产品线定位 + 深圳万象城 / 万象天地营收</div></span>
+    <span class="t-type">零售 · 商业地产基准</span>
+    <span class="t-pdf">9 份 PDF</span>
+    <span class="arr">→</span>
+  </a>
+  <a class="thread-row" href="hunan-road/">
+    <span class="no">02</span>
+    <span><span class="t-title">南京湖南路</span><div class="t-desc">1.1km 老牌商业街 + 1073m 烂尾地下街的存量复兴</div></span>
+    <span class="t-type">城市更新 · 存量商业街</span>
+    <span class="t-pdf">12 份 PDF</span>
+    <span class="arr">→</span>
+  </a>
+  <div class="thread-row placeholder">
+    <span class="no">03</span>
+    <span><span class="t-title">下一个项目</span><div class="t-desc">问一次 Ask ISI，即成一条线程</div></span>
+    <span class="t-type">—</span><span class="t-pdf">—</span><span class="arr" style="color:#bdbdbd">→</span>
+  </div></div>
+
+<div class="howto" id="howto">
+  <div class="left">
+    <span class="lbl">How to ask</span>
+    <h2>问出好问题</h2>
+    <p>四要素。给新同事——照着填，Ask ISI 才能给出精准情报。</p>
+  </div>
+  <div class="right">
+    <div class="step"><div class="n">01</div><h4>给足背景</h4><p>场地/项目是什么、卡在哪、已经做过什么。</p></div>
+    <div class="step"><div class="n">02</div><h4>说清地理行业</h4><p>哪个城市、哪个商圈、哪个赛道。</p></div>
+    <div class="step"><div class="n">03</div><h4>点名要什么</h4><p>数据趋势？案例？可行性判断？</p></div>
+    <div class="step"><div class="n">04</div><h4>关联决策</h4><p>这份情报用在什么决策上。</p></div>
+  </div>
+</div>
+
+<div class="container" style="padding-top:40px;padding-bottom:40px">
+  <div class="tplwrap">
+    <pre>{项目}市场情报：
 {场地背景 + 现状困境 + 已经做过的尝试}。
-现在要做 {决策/策划}，策略是「{一句话策略}」。
+现在要做 {决策}，策略是「{一句话策略}」。
 请提供：
 1) {城市/商圈} 商业地产与零售市场的最新数据与趋势；
 2) 类似 {类型} 存量改造/复兴的成功与失败案例及 benchmark；
-3) {关键难点} 的可行性与经验教训。」</div>
-  <p style="font-size:12.5px;color:var(--muted)">参考真实问法：见「华润置地」和「南京湖南路」两个情报台里的检索原文。</p>
+3) {关键难点} 的可行性与经验教训。</pre>
+    <button class="btn" id="copybtn" onclick="copyTpl()">复制模板</button>
+  </div>
 </div>
 
-<footer>
-  <p>LOCUS · 缘知 — 场所精神 × 椭圆的轨迹。因连接而生洞察。</p>
-  <p>情报台随项目持续增长；每个新项目问一次 ISI，就多一条可被引用的「线程」。</p>
-</footer>
+<div class="meth" id="meth">
+  <span class="lbl">方法论</span>
+  <div class="grid">
+    <div class="m"><h4>数据源</h4>Nablitics 社会/地理情感 · 290+ 城市设计特征 · ~500 智库报告聚合。</div>
+    <div class="m"><h4>评分</h4>单一分数过简 → 用「状态概况」多维对比；单一数字是妥协输出。</div>
+    <div class="m"><h4>AI 架构</h4>要 harness 而非更聪明模型；拆咨询 + 设计方案，多模态，从 ground truth 出发。</div>
+  </div>
 </div>
+
+<div class="meth" id="emis" style="border-bottom:1px solid var(--hairline)">
+  <span class="lbl brick">EMIS · Ask ISI</span>
+  <div class="grid">
+    <div class="m"><h4>情报来源</h4>EMIS Ask ISI（AI 检索），回答自带引用文档。</div>
+    <div class="m"><h4>PDF 下载</h4>embed-doc?dcid=&lt;ID&gt; 直连，绕过试用下载限制。</div>
+    <div class="m"><h4>登录</h4>cas.emis.com · 单会话限制。</div>
+  </div>
+</div>
+
+<footer>LOCUS · 缘知 — 场所精神 × 椭圆的轨迹。因连接而生洞察。</footer>
+
+<script>
+function copyTpl(){var t=document.querySelector('.tplwrap pre').textContent;navigator.clipboard.writeText(t).then(function(){var b=document.getElementById('copybtn');b.textContent='已复制';setTimeout(function(){b.textContent='复制模板';},1500);});}
+</script>
 </body>
 </html>
